@@ -1,0 +1,116 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  background: #fff7ed;
+  color: #0f172a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  background:
+    linear-gradient(180deg, rgba(255, 247, 237, 0.95) 0%, rgba(248, 250, 252, 1) 46%),
+    #f8fafc;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.app-page {
+  min-height: 100vh;
+  padding: 1rem 1rem calc(env(safe-area-inset-bottom) + 6rem);
+}
+
+.input {
+  width: 100%;
+  border-radius: 0.5rem;
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  padding: 0.65rem 0.75rem;
+  color: #0f172a;
+  outline: none;
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.input:focus {
+  border-color: #be123c;
+  box-shadow: 0 0 0 3px rgba(244, 63, 94, 0.16);
+}
+
+[data-theme='teal'] .input:focus {
+  border-color: #0f766e;
+  box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.16);
+}
+
+[data-theme='plum'] .input:focus {
+  border-color: #7c3aed;
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.16);
+}
+
+.primary-button {
+  display: inline-flex;
+  min-height: 3rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 0.5rem;
+  background: #be123c;
+  padding: 0.75rem 1rem;
+  font-weight: 700;
+  color: #ffffff;
+  transition: transform 160ms ease, background 160ms ease;
+}
+
+.primary-button:active {
+  transform: scale(0.98);
+}
+
+.secondary-button {
+  display: inline-flex;
+  min-height: 3rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  padding: 0.75rem 1rem;
+  font-weight: 700;
+  color: #334155;
+  transition: transform 160ms ease, border-color 160ms ease;
+}
+
+.secondary-button:active {
+  transform: scale(0.98);
+}
+
+.page-title {
+  font-size: 1.65rem;
+  line-height: 1.15;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.section-title {
+  font-size: 1rem;
+  line-height: 1.4;
+  font-weight: 800;
+  color: #0f172a;
+}
