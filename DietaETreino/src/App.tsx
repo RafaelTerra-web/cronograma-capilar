@@ -10,8 +10,16 @@ import { Today } from './pages/Today';
 import { Workout } from './pages/Workout';
 import type { AppData, AppTab, DailyChecks, ExerciseLog, Goals, Meal, Profile, ProgressEntry } from './types';
 import { calculateDynamicGoals, calculateMealPlan } from './utils/dietCalculator';
+import { createDefaultNotificationSettings } from './utils/notifications';
 
-const STORAGE_KEY = 'ana-fit-planner:data:v2';
+const STORAGE_KEY = 'ana-fit-planner:data:v4';
+
+const tabs: AppTab[] = ['today', 'workout', 'diet', 'progress', 'settings'];
+
+function getInitialTab(): AppTab {
+  const tab = new URLSearchParams(window.location.search).get('tab') as AppTab | null;
+  return tab && tabs.includes(tab) ? tab : 'today';
+}
 
 function getDateKey(date = new Date()) {
   const month = String(date.getMonth() + 1).padStart(2, '0');
@@ -34,6 +42,7 @@ function createInitialData(): AppData {
     profile: defaultProfile,
     goals: defaultGoals,
     meals: defaultMeals,
+    notifications: createDefaultNotificationSettings(),
     dailyChecks: {
       [getDateKey()]: createDailyChecks(defaultMeals),
     },
@@ -55,8 +64,9 @@ function normalizeDailyChecks(checks: DailyChecks | undefined, meals: Meal[]): D
 }
 
 function App() {
-  const [activeTab, setActiveTab] = useState<AppTab>('today');
+  const [activeTab, setActiveTab] = useState<AppTab>(getInitialTab);
   const [data, setData] = useLocalStorage<AppData>(STORAGE_KEY, createInitialData);
+  const notifications = data.notifications ?? createDefaultNotificationSettings();
   const dateKey = getDateKey();
   const todayPlan = useMemo(() => getTodayPlan(), []);
   const todayChecks = normalizeDailyChecks(data.dailyChecks[dateKey], data.meals);
@@ -124,8 +134,19 @@ function App() {
         profile: nextProfile,
         goals: nextGoals,
         meals: calculateMealPlan(nextProfile, nextGoals),
+        notifications: current.notifications ?? createDefaultNotificationSettings(),
       };
     });
+  };
+
+  const updateNotifications = (notificationsUpdate: Partial<AppData['notifications']>) => {
+    setData((current) => ({
+      ...current,
+      notifications: {
+        ...(current.notifications ?? createDefaultNotificationSettings()),
+        ...notificationsUpdate,
+      },
+    }));
   };
 
   const addProgress = (entry: ProgressEntry) => {
@@ -172,7 +193,13 @@ function App() {
         ) : null}
         {activeTab === 'progress' ? <Progress data={data} onAddProgress={addProgress} /> : null}
         {activeTab === 'settings' ? (
-          <Settings data={data} onProfileChange={updateProfile} onGoalsChange={updateGoals} onResetData={resetData} />
+          <Settings
+            data={{ ...data, notifications }}
+            onProfileChange={updateProfile}
+            onGoalsChange={updateGoals}
+            onNotificationsChange={updateNotifications}
+            onResetData={resetData}
+          />
         ) : null}
       </div>
       {activeTab !== 'today' ? <BottomNav activeTab={activeTab} onChange={setActiveTab} /> : null}

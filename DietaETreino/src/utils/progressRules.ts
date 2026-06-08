@@ -12,24 +12,29 @@ function maxRepFromRange(range: string) {
 
 export function getExerciseFeedback(exercise: Exercise, log?: ExerciseLog) {
   if (!log?.done) {
-    return 'Execucao primeiro, carga depois.';
+    return 'Execução primeiro, carga depois.';
   }
 
   const maxRep = maxRepFromRange(exercise.reps);
   const reportedReps = Number(log.reps);
   const rir = Number(log.rir);
+  const hasProgressData = log.reps.trim() !== '' && log.rir.trim() !== '';
+
+  if (!hasProgressData) {
+    return 'Exercício marcado. Preencha repetições e RIR para gerar uma sugestão de carga.';
+  }
 
   if (maxRep && reportedReps >= maxRep && rir >= 1 && rir <= 2) {
     return exercise.progressionType === 'large'
-      ? 'Boa. Da para tentar subir +2 a 5 kg na proxima.'
-      : 'Boa. Da para tentar subir 1 placa ou o menor incremento.';
+      ? 'Boa. Dá para tentar subir +2 a 5 kg na próxima.'
+      : 'Boa. Dá para tentar subir 1 placa ou o menor incremento.';
   }
 
-  if (rir === 0) {
-    return 'Carga ficou pesada. Mantem ou reduz um pouco para preservar execucao.';
+  if (rir === 0 && reportedReps > 0) {
+    return 'Você chegou perto da falha. Mantenha a carga até controlar melhor a execução.';
   }
 
-  return 'Mantem a carga ate bater todas as series.';
+  return 'Mantenha a carga até bater todas as séries com boa execução.';
 }
 
 export function getDietSuggestions(meals: Meal[], goals: Goals, progressEntries: ProgressEntry[]) {
@@ -39,7 +44,7 @@ export function getDietSuggestions(meals: Meal[], goals: Goals, progressEntries:
   const suggestions: string[] = [];
 
   if (totalProtein < goals.protein) {
-    suggestions.push('Proteina baixa: reforcar frango, ovo ou queijo.');
+    suggestions.push('Proteína baixa: reforçar frango, ovo ou queijo.');
   }
 
   if (totalCalories > goals.calories) {
@@ -47,15 +52,15 @@ export function getDietSuggestions(meals: Meal[], goals: Goals, progressEntries:
   }
 
   if (comparison.previous && comparison.percent <= -0.8) {
-    suggestions.push('Peso caiu rapido: se treino piorar, subir um pouco as calorias.');
+    suggestions.push('Peso caiu rápido: se treino piorar, subir um pouco as calorias.');
   }
 
   if (comparison.previous && comparison.percent >= -0.1) {
-    suggestions.push('Peso quase nao caiu: se repetir por 2 semanas, reduzir 100 a 150 kcal ou aumentar cardio leve.');
+    suggestions.push('Peso quase não caiu: se repetir por 2 semanas, reduzir 100 a 150 kcal ou aumentar cardio leve.');
   }
 
   suggestions.push('Treino fraco: colocar mais carboidrato antes do treino pode ajudar.');
-  suggestions.push('Fome alta: trocar parte por batata inglesa e dividir melhor as refeicoes.');
+  suggestions.push('Fome alta: trocar parte por batata inglesa e dividir melhor as refeições.');
 
   return suggestions;
 }

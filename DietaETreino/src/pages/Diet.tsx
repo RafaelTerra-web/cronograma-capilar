@@ -14,7 +14,7 @@ type DietProps = {
 };
 
 const foodLabels = {
-  proteins: 'Proteinas',
+  proteins: 'Proteínas',
   carbs: 'Carboidratos',
   fats: 'Gorduras',
 };
@@ -22,6 +22,8 @@ const foodLabels = {
 export function Diet({ data, todayChecks, onToggleMeal }: DietProps) {
   const totalCalories = data.meals.reduce((total, meal) => total + meal.calories, 0);
   const totalProtein = data.meals.reduce((total, meal) => total + meal.protein, 0);
+  const totalCarbs = data.meals.reduce((total, meal) => total + meal.carbs, 0);
+  const totalFat = data.meals.reduce((total, meal) => total + meal.fat, 0);
   const calorieProgress = Math.round((totalCalories / data.goals.calories) * 100);
   const proteinProgress = Math.round((totalProtein / data.goals.protein) * 100);
   const suggestions = getDietSuggestions(data.meals, data.goals, data.progressEntries);
@@ -29,7 +31,7 @@ export function Diet({ data, todayChecks, onToggleMeal }: DietProps) {
   return (
     <div className="space-y-5">
       <header className="pt-2">
-        <p className="text-sm font-semibold text-rose-700">Cutting leve e sustentavel</p>
+        <p className="text-sm font-semibold text-rose-700">Cutting leve e sustentável</p>
         <h1 className="page-title mt-1">Dieta</h1>
         <p className="mt-2 text-sm leading-relaxed text-slate-600">Plano com alimentos que a Ana realmente come, sem basear a dieta em salada.</p>
       </header>
@@ -39,31 +41,39 @@ export function Diet({ data, todayChecks, onToggleMeal }: DietProps) {
           <Utensils className="text-rose-700" size={20} aria-hidden="true" />
           <h2 className="section-title">Plano calculado</h2>
         </div>
-        <div className="mt-4 grid grid-cols-3 gap-2">
+        <div className="mt-4 grid grid-cols-2 gap-2">
           <div className="rounded-lg border border-white/10 bg-white/5 p-3">
             <p className="text-xs font-bold uppercase tracking-wide text-slate-500">Energia</p>
-            <p className="mt-1 text-lg font-black text-slate-50">{data.goals.calories}</p>
+            <p className="mt-1 text-lg font-black text-slate-50">{data.goals.calories} kcal</p>
           </div>
           <div className="rounded-lg border border-white/10 bg-white/5 p-3">
-            <p className="text-xs font-bold uppercase tracking-wide text-slate-500">Proteina</p>
+            <p className="text-xs font-bold uppercase tracking-wide text-slate-500">Proteína</p>
             <p className="mt-1 text-lg font-black text-slate-50">{data.goals.protein} g</p>
           </div>
           <div className="rounded-lg border border-white/10 bg-white/5 p-3">
-            <p className="text-xs font-bold uppercase tracking-wide text-slate-500">Agua</p>
+            <p className="text-xs font-bold uppercase tracking-wide text-slate-500">Carboidratos</p>
+            <p className="mt-1 text-lg font-black text-slate-50">{totalCarbs} g</p>
+          </div>
+          <div className="rounded-lg border border-white/10 bg-white/5 p-3">
+            <p className="text-xs font-bold uppercase tracking-wide text-slate-500">Gorduras</p>
+            <p className="mt-1 text-lg font-black text-slate-50">{totalFat} g</p>
+          </div>
+          <div className="rounded-lg border border-white/10 bg-white/5 p-3">
+            <p className="text-xs font-bold uppercase tracking-wide text-slate-500">Água</p>
             <p className="mt-1 text-lg font-black text-slate-50">{data.goals.waterLiters} L</p>
           </div>
         </div>
         <div className="mt-4 space-y-4">
           <ProgressBar value={calorieProgress} label={`${totalCalories} kcal no plano`} tone="amber" />
-          <ProgressBar value={proteinProgress} label={`${totalProtein} g de proteina`} tone="teal" />
+          <ProgressBar value={proteinProgress} label={`${totalProtein} g de proteína`} tone="teal" />
         </div>
         <p className="mt-4 rounded-lg bg-slate-50 p-3 text-sm leading-relaxed text-slate-600">
-          As metas e porcoes sao recalculadas em Ajustes. Se mudar perfil, treino, cardio ou meta manual, a dieta acompanha.
+          As metas e porções são recalculadas em Ajustes. Se mudar perfil, treino, cardio ou meta manual, a dieta acompanha.
         </p>
       </Card>
 
       <section className="space-y-3">
-        <h2 className="section-title">Refeicoes</h2>
+        <h2 className="section-title">Refeições</h2>
         {data.meals.map((meal) => (
           <MealCard
             meal={meal}
@@ -114,7 +124,7 @@ export function Diet({ data, todayChecks, onToggleMeal }: DietProps) {
       </Card>
 
       <Card>
-        <h2 className="section-title">Sugestoes automaticas</h2>
+        <h2 className="section-title">Sugestões automáticas</h2>
         <ul className="mt-4 space-y-2 text-sm leading-relaxed text-slate-700">
           {suggestions.map((suggestion) => (
             <li className="flex gap-2" key={suggestion}>

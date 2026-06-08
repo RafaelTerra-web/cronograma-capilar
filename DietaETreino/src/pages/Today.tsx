@@ -11,7 +11,7 @@ export function Today({ data, onSelectTab }: TodayProps) {
     <div className="flex min-h-[calc(100vh-2rem)] flex-col justify-center py-8">
       <header className="mb-10">
         <p className="text-sm font-semibold uppercase tracking-[0.22em] text-teal-300">Ana Fit Planner</p>
-        <h1 className="mt-3 text-3xl font-black leading-tight text-slate-50">Escolha por onde comecar</h1>
+        <h1 className="mt-3 text-3xl font-black leading-tight text-slate-50">Escolha por onde começar</h1>
         <p className="mt-3 max-w-xs text-sm leading-relaxed text-slate-400">
           Um acesso simples para {data.profile.name}: treino ou dieta, sem painel de numeros na entrada.
         </p>

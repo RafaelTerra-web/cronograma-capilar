@@ -57,7 +57,7 @@ export function Workout({ data, todayChecks, todayPlan, onExerciseLogChange, onT
         </Card>
 
         <Card>
-          <h2 className="section-title">Aderencia semanal</h2>
+          <h2 className="section-title">Aderência semanal</h2>
           <div className="mt-4 space-y-4">
             <ProgressBar value={trainingAdherence} label="Treinos" tone="rose" />
             <ProgressBar value={cardioAdherence} label="Cardios" tone="teal" />
@@ -80,7 +80,7 @@ export function Workout({ data, todayChecks, todayPlan, onExerciseLogChange, onT
               className={todayChecks.trainingDone ? 'primary-button bg-teal-700' : 'secondary-button'}
               onClick={() => onToggleCheck('trainingDone')}
             >
-              {todayChecks.trainingDone ? 'Treino concluido' : 'Marcar treino de hoje'}
+              {todayChecks.trainingDone ? 'Treino concluído' : 'Marcar treino de hoje'}
             </button>
           ) : null}
           {todayPlan.cardio ? (
@@ -89,7 +89,7 @@ export function Workout({ data, todayChecks, todayPlan, onExerciseLogChange, onT
               className={todayChecks.cardioDone ? 'primary-button bg-teal-700' : 'secondary-button'}
               onClick={() => onToggleCheck('cardioDone')}
             >
-              {todayChecks.cardioDone ? 'Cardio concluido' : 'Marcar cardio de hoje'}
+              {todayChecks.cardioDone ? 'Cardio concluído' : 'Marcar cardio de hoje'}
             </button>
           ) : null}
         </div>

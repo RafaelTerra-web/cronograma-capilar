@@ -1,26 +1,65 @@
-import { RotateCcw, Save } from 'lucide-react';
+import { Bell, RotateCcw, Save, Send } from 'lucide-react';
+import { useState } from 'react';
 import { Card } from '../components/Card';
-import type { AppData, Goals, Profile } from '../types';
+import type { AppData, Goals, NotificationSettings, Profile, Reminder } from '../types';
 import { estimateProtein } from '../utils/calculations';
 import { calculateDynamicGoals } from '../utils/dietCalculator';
+import { enablePushNotifications, getNotificationSupportMessage, showTestNotification } from '../utils/notifications';
 
 type SettingsProps = {
   data: AppData;
   onProfileChange: (profile: Partial<Profile>) => void;
   onGoalsChange: (goals: Partial<Goals>) => void;
+  onNotificationsChange: (notifications: Partial<NotificationSettings>) => void;
   onResetData: () => void;
 };
 
-export function Settings({ data, onProfileChange, onGoalsChange, onResetData }: SettingsProps) {
+export function Settings({ data, onProfileChange, onGoalsChange, onNotificationsChange, onResetData }: SettingsProps) {
+  const [notificationMessage, setNotificationMessage] = useState('');
   const proteinRange = estimateProtein(data.profile.weightKg);
   const suggestedGoals = calculateDynamicGoals(data.profile);
+  const supportMessage = getNotificationSupportMessage();
+
+  const updateReminder = (reminderId: string, changes: Partial<Reminder>) => {
+    onNotificationsChange({
+      reminders: data.notifications.reminders.map((reminder) => (reminder.id === reminderId ? { ...reminder, ...changes } : reminder)),
+    });
+  };
+
+  const handleEnableNotifications = async () => {
+    setNotificationMessage('Sincronizando lembretes...');
+
+    try {
+      const result = await enablePushNotifications(data.notifications);
+      onNotificationsChange({
+        enabled: true,
+        permission: result.permission,
+        subscriptionEndpoint: result.endpoint,
+        lastSync: result.syncedAt,
+      });
+      setNotificationMessage('Notificações sincronizadas. No iPhone, abra o app pelo ícone da Tela de Início.');
+    } catch (error) {
+      setNotificationMessage(error instanceof Error ? error.message : 'Não foi possível ativar as notificações.');
+    }
+  };
+
+  const handleTestNotification = async () => {
+    setNotificationMessage('Enviando teste...');
+
+    try {
+      await showTestNotification();
+      setNotificationMessage('Teste enviado.');
+    } catch (error) {
+      setNotificationMessage(error instanceof Error ? error.message : 'Não foi possível enviar o teste.');
+    }
+  };
 
   return (
     <div className="space-y-5">
       <header className="pt-2">
-        <p className="text-sm font-semibold text-rose-700">Preferencias e metas</p>
+        <p className="text-sm font-semibold text-rose-700">Preferências e metas</p>
         <h1 className="page-title mt-1">Ajustes</h1>
-        <p className="mt-2 text-sm leading-relaxed text-slate-600">Dados locais salvos no navegador, sem login e sem backend.</p>
+        <p className="mt-2 text-sm leading-relaxed text-slate-600">Dados locais salvos no navegador.</p>
       </header>
 
       <Card>
@@ -41,7 +80,7 @@ export function Settings({ data, onProfileChange, onGoalsChange, onResetData }: 
               />
             </label>
             <label className="space-y-1 text-sm font-medium text-slate-700">
-              <span>Altura cm</span>
+              <span>Altura em cm</span>
               <input
                 className="input"
                 inputMode="numeric"
@@ -50,7 +89,7 @@ export function Settings({ data, onProfileChange, onGoalsChange, onResetData }: 
               />
             </label>
             <label className="space-y-1 text-sm font-medium text-slate-700">
-              <span>Dias treino</span>
+              <span>Dias de treino</span>
               <input
                 className="input"
                 inputMode="numeric"
@@ -59,7 +98,7 @@ export function Settings({ data, onProfileChange, onGoalsChange, onResetData }: 
               />
             </label>
             <label className="space-y-1 text-sm font-medium text-slate-700">
-              <span>Dias cardio</span>
+              <span>Dias de cardio</span>
               <input
                 className="input"
                 inputMode="numeric"
@@ -70,16 +109,16 @@ export function Settings({ data, onProfileChange, onGoalsChange, onResetData }: 
           </div>
         </div>
         <p className="mt-4 rounded-lg bg-teal-50 p-3 text-sm font-medium text-teal-800">
-          Proteina estimada para o peso atual: {proteinRange.low} a {proteinRange.high} g/dia.
+          Proteína estimada para o peso atual: {proteinRange.low} a {proteinRange.high} g/dia.
         </p>
       </Card>
 
       <Card>
         <div className="flex items-start justify-between gap-3">
           <div>
-            <h2 className="section-title">Metas e dieta dinamica</h2>
+            <h2 className="section-title">Metas e dieta dinâmica</h2>
             <p className="mt-1 text-sm leading-relaxed text-slate-600">
-              Alterar os campos abaixo recalcula as porcoes da dieta automaticamente.
+              Alterar estes campos recalcula as porções e os macros das refeições.
             </p>
           </div>
         </div>
@@ -94,7 +133,7 @@ export function Settings({ data, onProfileChange, onGoalsChange, onResetData }: 
             />
           </label>
           <label className="space-y-1 text-sm font-medium text-slate-700">
-            <span>Proteina</span>
+            <span>Proteína</span>
             <input
               className="input"
               inputMode="numeric"
@@ -112,7 +151,7 @@ export function Settings({ data, onProfileChange, onGoalsChange, onResetData }: 
             />
           </label>
           <label className="space-y-1 text-sm font-medium text-slate-700">
-            <span>Agua</span>
+            <span>Água</span>
             <input
               className="input"
               inputMode="decimal"
@@ -122,12 +161,57 @@ export function Settings({ data, onProfileChange, onGoalsChange, onResetData }: 
           </label>
         </div>
         <div className="mt-4 rounded-lg border border-white/10 bg-white/5 p-3 text-sm leading-relaxed text-slate-600">
-          Sugestao automatica atual: {suggestedGoals.calories} kcal, {suggestedGoals.protein} g de proteina,{' '}
-          {suggestedGoals.fat} g de gorduras e {suggestedGoals.waterLiters} L de agua.
+          Sugestão automática atual: {suggestedGoals.calories} kcal, {suggestedGoals.protein} g de proteína,{' '}
+          {suggestedGoals.fat} g de gorduras e {suggestedGoals.waterLiters} L de água.
         </div>
         <button className="secondary-button mt-3 w-full" type="button" onClick={() => onGoalsChange(suggestedGoals)}>
           Recalcular dieta com o perfil atual
         </button>
+      </Card>
+
+      <Card>
+        <div className="flex items-center gap-2">
+          <Bell className="text-teal-700" size={20} aria-hidden="true" />
+          <h2 className="section-title">Notificações</h2>
+        </div>
+        <p className="mt-2 text-sm leading-relaxed text-slate-600">
+          No iPhone, as notificações push funcionam quando o app está instalado na Tela de Início e aberto pelo ícone instalado.
+        </p>
+        <div className="mt-4 space-y-3">
+          {data.notifications.reminders.map((reminder) => (
+            <div className="grid grid-cols-[auto_1fr_auto] items-center gap-3 rounded-lg border border-white/10 bg-white/5 p-3" key={reminder.id}>
+              <input
+                className="h-5 w-5 accent-teal-500"
+                type="checkbox"
+                checked={reminder.enabled}
+                onChange={(event) => updateReminder(reminder.id, { enabled: event.target.checked })}
+                aria-label={`Ativar ${reminder.label}`}
+              />
+              <span className="text-sm font-semibold text-slate-100">{reminder.label}</span>
+              <input
+                className="input w-28"
+                type="time"
+                value={reminder.time}
+                onChange={(event) => updateReminder(reminder.id, { time: event.target.value })}
+              />
+            </div>
+          ))}
+        </div>
+        <div className="mt-4 grid grid-cols-2 gap-3">
+          <button className="primary-button" type="button" onClick={handleEnableNotifications} disabled={Boolean(supportMessage)}>
+            <Bell size={18} aria-hidden="true" />
+            Ativar
+          </button>
+          <button className="secondary-button" type="button" onClick={handleTestNotification}>
+            <Send size={18} aria-hidden="true" />
+            Testar
+          </button>
+        </div>
+        <p className="mt-3 text-sm leading-relaxed text-slate-500">
+          {supportMessage ??
+            notificationMessage ??
+            `Status: ${data.notifications.enabled ? 'ativadas' : 'não ativadas'}. Permissão: ${data.notifications.permission}.`}
+        </p>
       </Card>
 
       <Card>
@@ -149,7 +233,7 @@ export function Settings({ data, onProfileChange, onGoalsChange, onResetData }: 
             />
           </label>
           <label className="block space-y-1 text-sm font-medium text-slate-700">
-            <span>Nao come</span>
+            <span>Não come</span>
             <textarea
               className="input min-h-24 resize-none"
               value={data.profile.avoidedFoods.join('\n')}

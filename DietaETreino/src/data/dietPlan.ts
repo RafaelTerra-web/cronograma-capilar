@@ -10,11 +10,11 @@ export const defaultProfile: Profile = {
   preferredFoods: [
     'Peito de frango',
     'Arroz',
-    'Feijao',
+    'Feijão',
     'Farofa',
     'Batata inglesa',
     'Batata palha',
-    'Pao com queijo',
+    'Pão com queijo',
     'Presunto',
   ],
   avoidedFoods: ['Verduras', 'Legumes', 'Saladas'],
@@ -27,9 +27,9 @@ export const defaultMeals: Meal[] = calculateMealPlan(defaultProfile, defaultGoa
 
 export const cuttingRules = [
   'Perder gordura sem derrubar demais a performance do treino.',
-  'Manter deficit moderado, sem cortar carboidrato de forma agressiva.',
-  'Proteina alta todos os dias.',
-  'Avaliar peso pela media semanal, nao por um dia isolado.',
-  'Se o peso cair rapido demais e o treino piorar, subir um pouco as calorias.',
-  'Se o peso nao cair por 2 semanas, reduzir 100 a 150 kcal ou aumentar cardio leve.',
+  'Manter déficit moderado, sem cortar carboidrato de forma agressiva.',
+  'Proteína alta todos os dias.',
+  'Avaliar peso pela média semanal, não por um dia isolado.',
+  'Se o peso cair rápido demais e o treino piorar, subir um pouco as calorias.',
+  'Se o peso não cair por 2 semanas, reduzir 100 a 150 kcal ou aumentar cardio leve.',
 ];

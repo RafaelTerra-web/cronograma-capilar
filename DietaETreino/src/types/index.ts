@@ -27,7 +27,28 @@ export type Meal = {
   items: string[];
   calories: number;
   protein: number;
+  carbs: number;
+  fat: number;
   note: string;
+};
+
+export type ReminderKind = 'meal' | 'workout';
+
+export type Reminder = {
+  id: string;
+  label: string;
+  time: string;
+  enabled: boolean;
+  kind: ReminderKind;
+};
+
+export type NotificationSettings = {
+  enabled: boolean;
+  permission: NotificationPermission | 'unsupported' | 'not-requested';
+  reminders: Reminder[];
+  timezone: string;
+  subscriptionEndpoint?: string;
+  lastSync?: string;
 };
 
 export type FoodGroup = 'proteins' | 'carbs' | 'fats';
@@ -103,6 +124,7 @@ export type AppData = {
   profile: Profile;
   goals: Goals;
   meals: Meal[];
+  notifications: NotificationSettings;
   dailyChecks: Record<string, DailyChecks>;
   exerciseLogs: Record<string, ExerciseLog>;
   progressEntries: ProgressEntry[];

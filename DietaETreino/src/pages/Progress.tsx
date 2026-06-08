@@ -129,7 +129,7 @@ export function Progress({ data, onAddProgress }: ProgressProps) {
       <header className="pt-2">
         <p className="text-sm font-semibold text-rose-700">Medidas, cargas e constancia</p>
         <h1 className="page-title mt-1">Progresso</h1>
-        <p className="mt-2 text-sm leading-relaxed text-slate-600">Acompanhe media de peso, cintura, quadril e cargas principais.</p>
+        <p className="mt-2 text-sm leading-relaxed text-slate-600">Acompanhe média de peso, cintura, quadril e cargas principais.</p>
       </header>
 
       <div className="grid grid-cols-2 gap-3">
@@ -146,7 +146,7 @@ export function Progress({ data, onAddProgress }: ProgressProps) {
       </div>
 
       <Card>
-        <h2 className="section-title">Aderencia registrada</h2>
+        <h2 className="section-title">Aderência registrada</h2>
         <div className="mt-4 space-y-4">
           <ProgressBar value={trainingAdherence} label="Treinos na semana" tone="rose" />
           <ProgressBar value={cardioAdherence} label="Cardios na semana" tone="teal" />
@@ -183,7 +183,7 @@ export function Progress({ data, onAddProgress }: ProgressProps) {
               />
             </label>
             <label className="space-y-1 text-sm font-medium text-slate-700">
-              <span>Bulgaro</span>
+              <span>Búlgaro</span>
               <input
                 className="input"
                 inputMode="decimal"
@@ -220,7 +220,7 @@ export function Progress({ data, onAddProgress }: ProgressProps) {
           </label>
           {form.photoDataUrl ? (
             <div className="overflow-hidden rounded-lg border border-slate-200">
-              <img className="h-48 w-full object-cover" src={form.photoDataUrl} alt="Previa da foto de progresso" />
+              <img className="h-48 w-full object-cover" src={form.photoDataUrl} alt="Prévia da foto de progresso" />
             </div>
           ) : null}
           <button className="primary-button w-full" type="submit">
@@ -238,7 +238,7 @@ export function Progress({ data, onAddProgress }: ProgressProps) {
       <Card>
         <div className="flex items-center gap-2">
           <Camera className="text-rose-700" size={20} aria-hidden="true" />
-          <h2 className="section-title">Ajuste calorico</h2>
+          <h2 className="section-title">Ajuste calórico</h2>
         </div>
         <p className="mt-3 text-sm leading-relaxed text-slate-700">{adjustment}</p>
       </Card>

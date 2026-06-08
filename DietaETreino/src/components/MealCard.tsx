@@ -32,8 +32,8 @@ export function MealCard({ meal, done = false, editable = false, onToggle, onCha
               done ? 'border-teal-700 bg-teal-700 text-white' : 'border-slate-200 bg-white text-slate-500'
             }`}
             onClick={onToggle}
-            aria-label={done ? 'Desmarcar refeicao' : 'Marcar refeicao'}
-            title={done ? 'Desmarcar refeicao' : 'Marcar refeicao'}
+            aria-label={done ? 'Desmarcar refeição' : 'Marcar refeição'}
+            title={done ? 'Desmarcar refeição' : 'Marcar refeição'}
           >
             <Check size={19} aria-hidden="true" />
           </button>
@@ -68,12 +68,30 @@ export function MealCard({ meal, done = false, editable = false, onToggle, onCha
               />
             </label>
             <label className="space-y-1 text-sm font-medium text-slate-700">
-              <span>Proteina</span>
+              <span>Proteína</span>
               <input
                 className="input"
                 inputMode="numeric"
                 value={meal.protein}
                 onChange={(event) => updateMeal({ protein: Number(event.target.value) || 0 })}
+              />
+            </label>
+            <label className="space-y-1 text-sm font-medium text-slate-700">
+              <span>Carboidratos</span>
+              <input
+                className="input"
+                inputMode="numeric"
+                value={meal.carbs}
+                onChange={(event) => updateMeal({ carbs: Number(event.target.value) || 0 })}
+              />
+            </label>
+            <label className="space-y-1 text-sm font-medium text-slate-700">
+              <span>Gorduras</span>
+              <input
+                className="input"
+                inputMode="numeric"
+                value={meal.fat}
+                onChange={(event) => updateMeal({ fat: Number(event.target.value) || 0 })}
               />
             </label>
           </div>
@@ -91,7 +109,9 @@ export function MealCard({ meal, done = false, editable = false, onToggle, onCha
 
       <div className="mt-4 flex flex-wrap gap-2 text-sm">
         <span className="rounded-lg bg-rose-50 px-3 py-1 font-semibold text-rose-700">{meal.calories} kcal</span>
-        <span className="rounded-lg bg-teal-50 px-3 py-1 font-semibold text-teal-700">{meal.protein} g proteina</span>
+        <span className="rounded-lg bg-teal-50 px-3 py-1 font-semibold text-teal-700">{meal.protein} g proteína</span>
+        <span className="rounded-lg bg-amber-50 px-3 py-1 font-semibold text-amber-700">{meal.carbs} g carbo</span>
+        <span className="rounded-lg bg-slate-100 px-3 py-1 font-semibold text-slate-700">{meal.fat} g gordura</span>
       </div>
 
       {meal.note ? <p className="mt-3 text-sm leading-relaxed text-slate-500">{meal.note}</p> : null}

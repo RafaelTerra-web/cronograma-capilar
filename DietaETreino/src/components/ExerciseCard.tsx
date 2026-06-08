@@ -43,8 +43,8 @@ export function ExerciseCard({ exercise, log = defaultLog, onChange }: ExerciseC
             log.done ? 'border-teal-700 bg-teal-700 text-white' : 'border-slate-200 bg-white text-slate-500'
           }`}
           onClick={() => updateLog({ done: !log.done })}
-          aria-label={log.done ? 'Desmarcar exercicio' : 'Marcar exercicio'}
-          title={log.done ? 'Desmarcar exercicio' : 'Marcar exercicio'}
+          aria-label={log.done ? 'Desmarcar exercício' : 'Marcar exercício'}
+          title={log.done ? 'Desmarcar exercício' : 'Marcar exercício'}
         >
           <Check size={19} aria-hidden="true" />
         </button>
@@ -72,7 +72,7 @@ export function ExerciseCard({ exercise, log = defaultLog, onChange }: ExerciseC
           />
         </label>
         <label className="space-y-1 text-sm font-medium text-slate-700">
-          <span>Series feitas</span>
+            <span>Séries feitas</span>
           <input
             className="input"
             inputMode="numeric"
@@ -97,7 +97,7 @@ export function ExerciseCard({ exercise, log = defaultLog, onChange }: ExerciseC
         <span>Observacao</span>
         <textarea
           className="input min-h-20 resize-none"
-          placeholder="Como foi a execucao?"
+          placeholder="Como foi a execução?"
           value={log.note}
           onChange={(event) => updateLog({ note: event.target.value })}
         />

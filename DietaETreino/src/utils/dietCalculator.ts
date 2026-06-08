@@ -25,36 +25,57 @@ export function calculateMealPlan(profile: Profile, goals: Goals): Meal[] {
   const fallbackGoals = calculateDynamicGoals(profile);
   const calories = goals.calories || fallbackGoals.calories;
   const protein = goals.protein || fallbackGoals.protein;
-  const chickenPortion = protein >= 125 ? '150 g' : protein >= 115 ? '130 a 150 g' : '120 a 130 g';
-  const ricePortion = calories >= 1750 ? '120 a 140 g' : calories >= 1650 ? '100 a 130 g' : '80 a 110 g';
-  const potatoPortion = calories >= 1750 ? '150 a 180 g' : calories >= 1650 ? '120 a 150 g' : '100 a 130 g';
-  const breakfastProtein = protein >= 125 ? '1 ovo ou mais frango em outra refeicao' : 'reforcar frango em outra refeicao se precisar';
-  const snackOption = protein >= 125 ? 'Frango desfiado com pao ou ovo com pao' : 'Pao com queijo ou ovo com pao';
+  const fat = goals.fat || fallbackGoals.fat;
+  const carbs = Math.max(80, Math.round((calories - protein * 4 - fat * 9) / 4));
+  const chickenGrams = protein >= 125 ? 150 : protein >= 115 ? 140 : 125;
+  const riceGrams = calories >= 1750 ? 140 : calories >= 1650 ? 120 : 95;
+  const beansGrams = calories >= 1650 ? 100 : 80;
+  const potatoGrams = calories >= 1750 ? 180 : calories >= 1650 ? 150 : 120;
+  const breadGrams = calories >= 1700 ? 55 : 50;
+  const cheeseGrams = fat >= 55 ? 25 : 20;
+  const farofaGrams = calories >= 1700 ? 15 : 10;
+  const hamGrams = 25;
+  const shreddedChickenGrams = protein >= 125 ? 80 : 60;
+  const breakfastProtein = protein >= 125 ? '1 ovo inteiro (50 g)' : '1 ovo inteiro opcional (50 g)';
+  const snackOption =
+    protein >= 125
+      ? `${shreddedChickenGrams} g de frango desfiado com ${breadGrams} g de pão`
+      : `${breadGrams} g de pão com ${cheeseGrams} g de queijo`;
   const breakfastCalories = Math.round(calories * 0.2);
   const lunchCalories = Math.round(calories * 0.35);
   const snackCalories = Math.round(calories * 0.2);
   const breakfastProteinTarget = Math.round(protein * 0.15);
   const lunchProtein = Math.round(protein * 0.4);
   const snackProtein = Math.round(protein * 0.2);
+  const breakfastCarbs = Math.round(carbs * 0.25);
+  const lunchCarbs = Math.round(carbs * 0.35);
+  const snackCarbs = Math.round(carbs * 0.2);
+  const breakfastFat = Math.round(fat * 0.3);
+  const lunchFat = Math.round(fat * 0.22);
+  const snackFat = Math.round(fat * 0.22);
 
   return [
     {
       id: 'cafe',
-      title: 'Cafe da manha',
-      time: 'Manha',
+      title: 'Café da manhã',
+      time: 'Manhã',
       calories: breakfastCalories,
       protein: breakfastProteinTarget,
-      items: ['Pao frances ou pao de forma', 'Queijo em porcao moderada', 'Presunto em quantidade moderada', breakfastProtein],
-      note: 'A quantidade se ajusta pelas metas em Ajustes. Sem verdura forcada no plano principal.',
+      carbs: breakfastCarbs,
+      fat: breakfastFat,
+      items: [`${breadGrams} g de pão francês ou pão de forma`, `${cheeseGrams} g de queijo`, `${hamGrams} g de presunto`, breakfastProtein],
+      note: 'As quantidades se ajustam pelas metas em Ajustes. Sem verdura forçada no plano principal.',
     },
     {
       id: 'almoco',
-      title: 'Almoco',
+      title: 'Almoço',
       time: 'Meio do dia',
       calories: lunchCalories,
       protein: lunchProtein,
-      items: [`${chickenPortion} de peito de frango`, `${ricePortion} de arroz cozido`, '80 a 100 g de feijao', '10 a 15 g de farofa'],
-      note: 'Se as calorias baixarem, cortar primeiro farofa/batata palha antes de mexer na proteina.',
+      carbs: lunchCarbs,
+      fat: lunchFat,
+      items: [`${chickenGrams} g de peito de frango`, `${riceGrams} g de arroz cozido`, `${beansGrams} g de feijão`, `${farofaGrams} g de farofa`],
+      note: 'Se as calorias baixarem, cortar primeiro farofa ou batata palha antes de mexer na proteína.',
     },
     {
       id: 'lanche',
@@ -62,7 +83,9 @@ export function calculateMealPlan(profile: Profile, goals: Goals): Meal[] {
       time: 'Tarde',
       calories: snackCalories,
       protein: snackProtein,
-      items: [snackOption, 'Queijo com pao ajustando a quantidade', 'Banana opcional, se ela aceitar'],
+      carbs: snackCarbs,
+      fat: snackFat,
+      items: [snackOption, `${cheeseGrams} g de queijo se trocar por pão com queijo`, '80 g de banana opcional, se ela aceitar'],
       note: 'Em dia de treino fraco, concentrar mais carboidrato antes do treino.',
     },
     {
@@ -71,8 +94,10 @@ export function calculateMealPlan(profile: Profile, goals: Goals): Meal[] {
       time: 'Noite',
       calories: calories - breakfastCalories - lunchCalories - snackCalories,
       protein: protein - breakfastProteinTarget - lunchProtein - snackProtein,
-      items: [`${chickenPortion} de peito de frango`, `${potatoPortion} de batata inglesa ou ${ricePortion} de arroz`, 'Feijao em porcao moderada', 'Pouca farofa ou sem farofa'],
-      note: 'Batata palha fica como detalhe, nao como base da refeicao.',
+      carbs: carbs - breakfastCarbs - lunchCarbs - snackCarbs,
+      fat: fat - breakfastFat - lunchFat - snackFat,
+      items: [`${chickenGrams} g de peito de frango`, `${potatoGrams} g de batata inglesa ou ${riceGrams} g de arroz`, `${beansGrams} g de feijão`, 'Farofa: 0 a 10 g, se ainda couber nas metas'],
+      note: 'Batata palha fica como detalhe, não como base da refeição.',
     },
   ];
 }

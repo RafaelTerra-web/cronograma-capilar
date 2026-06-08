@@ -15,6 +15,12 @@ export default tseslint.config(
     },
   },
   {
+    files: ['netlify/functions/**/*.mjs'],
+    languageOptions: {
+      globals: globals.node,
+    },
+  },
+  {
     files: ['**/*.{ts,tsx}'],
     languageOptions: {
       ecmaVersion: 2020,
