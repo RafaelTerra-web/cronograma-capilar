@@ -1,6 +1,6 @@
 export type AppTab = 'today' | 'workout' | 'diet' | 'progress' | 'settings';
 
-export type ThemeName = 'rose' | 'teal' | 'plum';
+export type ThemeName = 'dark';
 
 export type Profile = {
   name: string;

@@ -4,14 +4,12 @@ import { MealCard } from '../components/MealCard';
 import { ProgressBar } from '../components/ProgressBar';
 import { cuttingRules } from '../data/dietPlan';
 import { foods } from '../data/foods';
-import type { AppData, DailyChecks, Goals, Meal } from '../types';
+import type { AppData, DailyChecks } from '../types';
 import { getDietSuggestions } from '../utils/progressRules';
 
 type DietProps = {
   data: AppData;
   todayChecks: DailyChecks;
-  onGoalsChange: (goals: Partial<Goals>) => void;
-  onMealChange: (meal: Meal) => void;
   onToggleMeal: (mealId: string) => void;
 };
 
@@ -21,7 +19,7 @@ const foodLabels = {
   fats: 'Gorduras',
 };
 
-export function Diet({ data, todayChecks, onGoalsChange, onMealChange, onToggleMeal }: DietProps) {
+export function Diet({ data, todayChecks, onToggleMeal }: DietProps) {
   const totalCalories = data.meals.reduce((total, meal) => total + meal.calories, 0);
   const totalProtein = data.meals.reduce((total, meal) => total + meal.protein, 0);
   const calorieProgress = Math.round((totalCalories / data.goals.calories) * 100);
@@ -39,53 +37,28 @@ export function Diet({ data, todayChecks, onGoalsChange, onMealChange, onToggleM
       <Card>
         <div className="flex items-center gap-2">
           <Utensils className="text-rose-700" size={20} aria-hidden="true" />
-          <h2 className="section-title">Metas editaveis</h2>
+          <h2 className="section-title">Plano calculado</h2>
         </div>
-        <div className="mt-4 grid grid-cols-2 gap-3">
-          <label className="space-y-1 text-sm font-medium text-slate-700">
-            <span>Calorias</span>
-            <input
-              className="input"
-              inputMode="numeric"
-              value={data.goals.calories}
-              onChange={(event) => onGoalsChange({ calories: Number(event.target.value) || 0 })}
-            />
-          </label>
-          <label className="space-y-1 text-sm font-medium text-slate-700">
-            <span>Proteina</span>
-            <input
-              className="input"
-              inputMode="numeric"
-              value={data.goals.protein}
-              onChange={(event) => onGoalsChange({ protein: Number(event.target.value) || 0 })}
-            />
-          </label>
-          <label className="space-y-1 text-sm font-medium text-slate-700">
-            <span>Gorduras</span>
-            <input
-              className="input"
-              inputMode="numeric"
-              value={data.goals.fat}
-              onChange={(event) => onGoalsChange({ fat: Number(event.target.value) || 0 })}
-            />
-          </label>
-          <label className="space-y-1 text-sm font-medium text-slate-700">
-            <span>Agua</span>
-            <input
-              className="input"
-              inputMode="decimal"
-              value={data.goals.waterLiters}
-              onChange={(event) => onGoalsChange({ waterLiters: Number(event.target.value) || 0 })}
-            />
-          </label>
+        <div className="mt-4 grid grid-cols-3 gap-2">
+          <div className="rounded-lg border border-white/10 bg-white/5 p-3">
+            <p className="text-xs font-bold uppercase tracking-wide text-slate-500">Energia</p>
+            <p className="mt-1 text-lg font-black text-slate-50">{data.goals.calories}</p>
+          </div>
+          <div className="rounded-lg border border-white/10 bg-white/5 p-3">
+            <p className="text-xs font-bold uppercase tracking-wide text-slate-500">Proteina</p>
+            <p className="mt-1 text-lg font-black text-slate-50">{data.goals.protein} g</p>
+          </div>
+          <div className="rounded-lg border border-white/10 bg-white/5 p-3">
+            <p className="text-xs font-bold uppercase tracking-wide text-slate-500">Agua</p>
+            <p className="mt-1 text-lg font-black text-slate-50">{data.goals.waterLiters} L</p>
+          </div>
         </div>
         <div className="mt-4 space-y-4">
           <ProgressBar value={calorieProgress} label={`${totalCalories} kcal no plano`} tone="amber" />
           <ProgressBar value={proteinProgress} label={`${totalProtein} g de proteina`} tone="teal" />
         </div>
         <p className="mt-4 rounded-lg bg-slate-50 p-3 text-sm leading-relaxed text-slate-600">
-          Essa e uma estimativa inicial. O ideal e ajustar a cada 2 semanas com base na media do peso, medidas, fome,
-          treino e energia.
+          As metas e porcoes sao recalculadas em Ajustes. Se mudar perfil, treino, cardio ou meta manual, a dieta acompanha.
         </p>
       </Card>
 
@@ -93,12 +66,10 @@ export function Diet({ data, todayChecks, onGoalsChange, onMealChange, onToggleM
         <h2 className="section-title">Refeicoes</h2>
         {data.meals.map((meal) => (
           <MealCard
-            editable
             meal={meal}
             key={meal.id}
             done={Boolean(todayChecks.meals[meal.id])}
             onToggle={() => onToggleMeal(meal.id)}
-            onChange={onMealChange}
           />
         ))}
       </section>

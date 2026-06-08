@@ -9,8 +9,9 @@ import { Settings } from './pages/Settings';
 import { Today } from './pages/Today';
 import { Workout } from './pages/Workout';
 import type { AppData, AppTab, DailyChecks, ExerciseLog, Goals, Meal, Profile, ProgressEntry } from './types';
+import { calculateDynamicGoals, calculateMealPlan } from './utils/dietCalculator';
 
-const STORAGE_KEY = 'ana-fit-planner:data:v1';
+const STORAGE_KEY = 'ana-fit-planner:data:v2';
 
 function getDateKey(date = new Date()) {
   const month = String(date.getMonth() + 1).padStart(2, '0');
@@ -98,13 +99,6 @@ function App() {
     }));
   };
 
-  const updateMeal = (meal: Meal) => {
-    setData((current) => ({
-      ...current,
-      meals: current.meals.map((item) => (item.id === meal.id ? meal : item)),
-    }));
-  };
-
   const updateGoals = (goals: Partial<Goals>) => {
     setData((current) => ({
       ...current,
@@ -112,17 +106,26 @@ function App() {
         ...current.goals,
         ...goals,
       },
+      meals: calculateMealPlan(current.profile, { ...current.goals, ...goals }),
     }));
   };
 
   const updateProfile = (profile: Partial<Profile>) => {
-    setData((current) => ({
-      ...current,
-      profile: {
+    setData((current) => {
+      const nextProfile = {
         ...current.profile,
         ...profile,
-      },
-    }));
+        theme: 'dark' as const,
+      };
+      const nextGoals = calculateDynamicGoals(nextProfile);
+
+      return {
+        ...current,
+        profile: nextProfile,
+        goals: nextGoals,
+        meals: calculateMealPlan(nextProfile, nextGoals),
+      };
+    });
   };
 
   const addProgress = (entry: ProgressEntry) => {
@@ -152,11 +155,7 @@ function App() {
         {activeTab === 'today' ? (
           <Today
             data={data}
-            todayChecks={todayChecks}
-            todayPlan={todayPlan}
             onSelectTab={setActiveTab}
-            onToggleCheck={toggleCheck}
-            onToggleMeal={toggleMeal}
           />
         ) : null}
         {activeTab === 'workout' ? (
@@ -169,14 +168,14 @@ function App() {
           />
         ) : null}
         {activeTab === 'diet' ? (
-          <Diet data={data} todayChecks={todayChecks} onGoalsChange={updateGoals} onMealChange={updateMeal} onToggleMeal={toggleMeal} />
+          <Diet data={data} todayChecks={todayChecks} onToggleMeal={toggleMeal} />
         ) : null}
         {activeTab === 'progress' ? <Progress data={data} onAddProgress={addProgress} /> : null}
         {activeTab === 'settings' ? (
           <Settings data={data} onProfileChange={updateProfile} onGoalsChange={updateGoals} onResetData={resetData} />
         ) : null}
       </div>
-      <BottomNav activeTab={activeTab} onChange={setActiveTab} />
+      {activeTab !== 'today' ? <BottomNav activeTab={activeTab} onChange={setActiveTab} /> : null}
     </main>
   );
 }

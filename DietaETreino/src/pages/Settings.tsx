@@ -1,7 +1,8 @@
 import { RotateCcw, Save } from 'lucide-react';
 import { Card } from '../components/Card';
-import type { AppData, Goals, Profile, ThemeName } from '../types';
+import type { AppData, Goals, Profile } from '../types';
 import { estimateProtein } from '../utils/calculations';
+import { calculateDynamicGoals } from '../utils/dietCalculator';
 
 type SettingsProps = {
   data: AppData;
@@ -12,6 +13,7 @@ type SettingsProps = {
 
 export function Settings({ data, onProfileChange, onGoalsChange, onResetData }: SettingsProps) {
   const proteinRange = estimateProtein(data.profile.weightKg);
+  const suggestedGoals = calculateDynamicGoals(data.profile);
 
   return (
     <div className="space-y-5">
@@ -73,7 +75,14 @@ export function Settings({ data, onProfileChange, onGoalsChange, onResetData }: 
       </Card>
 
       <Card>
-        <h2 className="section-title">Metas</h2>
+        <div className="flex items-start justify-between gap-3">
+          <div>
+            <h2 className="section-title">Metas e dieta dinamica</h2>
+            <p className="mt-1 text-sm leading-relaxed text-slate-600">
+              Alterar os campos abaixo recalcula as porcoes da dieta automaticamente.
+            </p>
+          </div>
+        </div>
         <div className="mt-4 grid grid-cols-2 gap-2">
           <label className="space-y-1 text-sm font-medium text-slate-700">
             <span>Calorias</span>
@@ -112,6 +121,13 @@ export function Settings({ data, onProfileChange, onGoalsChange, onResetData }: 
             />
           </label>
         </div>
+        <div className="mt-4 rounded-lg border border-white/10 bg-white/5 p-3 text-sm leading-relaxed text-slate-600">
+          Sugestao automatica atual: {suggestedGoals.calories} kcal, {suggestedGoals.protein} g de proteina,{' '}
+          {suggestedGoals.fat} g de gorduras e {suggestedGoals.waterLiters} L de agua.
+        </div>
+        <button className="secondary-button mt-3 w-full" type="button" onClick={() => onGoalsChange(suggestedGoals)}>
+          Recalcular dieta com o perfil atual
+        </button>
       </Card>
 
       <Card>
@@ -148,19 +164,6 @@ export function Settings({ data, onProfileChange, onGoalsChange, onResetData }: 
             />
           </label>
         </div>
-      </Card>
-
-      <Card>
-        <h2 className="section-title">Tema visual</h2>
-        <select
-          className="input mt-4"
-          value={data.profile.theme}
-          onChange={(event) => onProfileChange({ theme: event.target.value as ThemeName })}
-        >
-          <option value="rose">Rose</option>
-          <option value="teal">Teal</option>
-          <option value="plum">Plum</option>
-        </select>
       </Card>
 
       <div className="grid grid-cols-2 gap-3">

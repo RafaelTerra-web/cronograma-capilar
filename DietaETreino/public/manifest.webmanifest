@@ -4,8 +4,8 @@
   "description": "Painel simples para dieta, treino, cardio e progresso.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#fff7ed",
-  "theme_color": "#fff7ed",
+  "background_color": "#020617",
+  "theme_color": "#020617",
   "orientation": "portrait",
   "icons": [
     {

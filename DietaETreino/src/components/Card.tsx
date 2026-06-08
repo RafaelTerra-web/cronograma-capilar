@@ -6,5 +6,5 @@ type CardProps = PropsWithChildren<{
 }>;
 
 export function Card({ children, className = '', as: Component = 'section' }: CardProps) {
-  return <Component className={`rounded-lg border border-slate-200 bg-white p-4 shadow-soft ${className}`}>{children}</Component>;
+  return <Component className={`rounded-lg border border-white/10 bg-slate-900/85 p-4 shadow-soft ${className}`}>{children}</Component>;
 }

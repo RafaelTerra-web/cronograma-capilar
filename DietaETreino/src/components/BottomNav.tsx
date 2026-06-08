@@ -7,7 +7,7 @@ type BottomNavProps = {
 };
 
 const items: Array<{ id: AppTab; label: string; icon: typeof Home }> = [
-  { id: 'today', label: 'Hoje', icon: Home },
+  { id: 'today', label: 'Inicio', icon: Home },
   { id: 'workout', label: 'Treino', icon: Dumbbell },
   { id: 'diet', label: 'Dieta', icon: Utensils },
   { id: 'progress', label: 'Progresso', icon: Activity },
@@ -16,7 +16,7 @@ const items: Array<{ id: AppTab; label: string; icon: typeof Home }> = [
 
 export function BottomNav({ activeTab, onChange }: BottomNavProps) {
   return (
-    <nav className="fixed inset-x-0 bottom-0 z-20 border-t border-slate-200 bg-white/95 px-2 pb-[calc(env(safe-area-inset-bottom)+0.5rem)] pt-2 backdrop-blur">
+    <nav className="fixed inset-x-0 bottom-0 z-20 border-t border-white/10 bg-slate-950/92 px-2 pb-[calc(env(safe-area-inset-bottom)+0.5rem)] pt-2 backdrop-blur">
       <div className="mx-auto grid max-w-md grid-cols-5 gap-1">
         {items.map((item) => {
           const Icon = item.icon;
@@ -25,7 +25,7 @@ export function BottomNav({ activeTab, onChange }: BottomNavProps) {
           return (
             <button
               className={`flex min-h-14 flex-col items-center justify-center gap-1 rounded-lg px-1 text-[0.72rem] font-semibold transition ${
-                isActive ? 'bg-rose-50 text-rose-700' : 'text-slate-500 hover:bg-slate-50 hover:text-slate-800'
+                isActive ? 'bg-white/10 text-teal-200' : 'text-slate-500 hover:bg-white/5 hover:text-slate-200'
               }`}
               type="button"
               data-testid={`nav-${item.id}`}

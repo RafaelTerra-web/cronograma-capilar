@@ -1,4 +1,4 @@
-import { Activity, Camera, Plus, Scale } from 'lucide-react';
+import { Activity, Camera, Plus, TrendingUp } from 'lucide-react';
 import { FormEvent, useMemo, useState } from 'react';
 import { Card } from '../components/Card';
 import { ProgressBar } from '../components/ProgressBar';
@@ -134,9 +134,9 @@ export function Progress({ data, onAddProgress }: ProgressProps) {
 
       <div className="grid grid-cols-2 gap-3">
         <Card className="p-3">
-          <Scale className="text-rose-700" size={22} aria-hidden="true" />
-          <p className="mt-3 text-xs font-bold uppercase tracking-wide text-slate-500">Peso atual</p>
-          <p className="mt-1 text-xl font-extrabold text-slate-950">{latestEntry?.weightKg || data.profile.weightKg} kg</p>
+          <TrendingUp className="text-rose-700" size={22} aria-hidden="true" />
+          <p className="mt-3 text-xs font-bold uppercase tracking-wide text-slate-500">Registros</p>
+          <p className="mt-1 text-xl font-extrabold text-slate-950">{data.progressEntries.length}</p>
         </Card>
         <Card className="p-3">
           <Activity className="text-teal-700" size={22} aria-hidden="true" />
