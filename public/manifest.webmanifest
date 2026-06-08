@@ -1,0 +1,18 @@
+{
+  "name": "Rotina Capilar da Princesa",
+  "short_name": "Rotina Capilar",
+  "description": "Cronograma capilar mobile-first com rotina, produtos, checklist e dicas.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fff7ef",
+  "theme_color": "#fff7ef",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
