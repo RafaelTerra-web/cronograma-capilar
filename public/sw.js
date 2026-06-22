@@ -1,4 +1,4 @@
-const CACHE_NAME = "cronograma-capilar-v2";
+const CACHE_NAME = "cronograma-capilar-v3";
 const APP_ASSETS = [
   "/",
   "/index.html",

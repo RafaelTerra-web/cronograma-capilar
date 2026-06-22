@@ -4,8 +4,8 @@ import { Icon } from "../utils/iconMap.jsx";
 export default function PrincessNoteCard({ note, variant = "rose" }) {
   const colors =
     variant === "blue"
-      ? "from-[#e8f7fb] to-[#fffaf0] text-[#2f6574]"
-      : "from-[#ffe4e8] to-[#fff7ef] text-[#9b4650]";
+      ? "from-[#dcebdc] to-[#f5faec] text-[#356b4a]"
+      : "from-[#dcefc7] to-[#f4f9ec] text-[#4e7c48]";
 
   return (
     <motion.article
@@ -16,7 +16,7 @@ export default function PrincessNoteCard({ note, variant = "rose" }) {
       viewport={{ once: true, margin: "-70px" }}
     >
       <Icon className="h-5 w-5" name="heart" />
-      <p className="mt-3 text-base font-bold leading-7 text-[#4a2e2d]">{note}</p>
+      <p className="mt-3 text-base font-bold leading-7 text-[#183525]">{note}</p>
     </motion.article>
   );
 }

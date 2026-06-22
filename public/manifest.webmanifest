@@ -4,8 +4,8 @@
   "description": "Cronograma capilar mobile-first com rotina, produtos, checklist e dicas.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#fff7ef",
-  "theme_color": "#fff7ef",
+  "background_color": "#f4f9ec",
+  "theme_color": "#f4f9ec",
   "orientation": "portrait",
   "icons": [
     {

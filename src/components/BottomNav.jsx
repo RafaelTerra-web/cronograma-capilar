@@ -15,8 +15,8 @@ export default function BottomNav({ activeTab, items, onNavigate }) {
               aria-current={isActive ? "page" : undefined}
               className={`touch-target flex flex-col items-center justify-center gap-1 rounded-lg px-1 py-2 text-[10px] font-semibold transition ${
                 isActive
-                  ? "bg-[#f8d8dc] text-[#8d3843] shadow-sm"
-                  : "text-[#7a5a58] hover:bg-white/70"
+                  ? "bg-[#dcefc7] text-[#285b35] shadow-sm"
+                  : "text-[#58705b] hover:bg-white/70"
               }`}
               key={item.id}
               onClick={() => onNavigate(item.id)}

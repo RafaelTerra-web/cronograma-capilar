@@ -1,10 +1,10 @@
 import { Icon } from "../utils/iconMap.jsx";
 
 const toneClasses = {
-  blue: "bg-[#e5f6fb] text-[#2e6877]",
-  coral: "bg-[#ffe1dc] text-[#a54037]",
-  gold: "bg-[#fff0bf] text-[#806118]",
-  rose: "bg-[#fbe0e6] text-[#a73e55]"
+  blue: "bg-[#dcebdc] text-[#356b4a]",
+  coral: "bg-[#e4f0d1] text-[#507a35]",
+  gold: "bg-[#e9efc8] text-[#66762c]",
+  rose: "bg-[#dcefc7] text-[#3f7d45]"
 };
 
 export default function ProductCard({ product }) {
@@ -19,37 +19,37 @@ export default function ProductCard({ product }) {
           <Icon className="h-6 w-6" name={product.icon} />
         </div>
         <div>
-          <h2 className="text-base font-bold leading-6 text-[#4a2e2d]">{product.name}</h2>
-          <p className="mt-1 text-sm font-semibold text-[#9b4650]">{product.role}</p>
+          <h2 className="text-base font-bold leading-6 text-[#183525]">{product.name}</h2>
+          <p className="mt-1 text-sm font-semibold text-[#4e7c48]">{product.role}</p>
         </div>
       </div>
 
       <dl className="mt-4 space-y-3 text-sm leading-6">
         <div>
-          <dt className="font-bold text-[#80504f]">Frequência</dt>
-          <dd className="text-[#654846]">{product.frequency}</dd>
+          <dt className="font-bold text-[#426047]">Frequência</dt>
+          <dd className="text-[#3d5542]">{product.frequency}</dd>
         </div>
         <div>
-          <dt className="font-bold text-[#80504f]">Como usar</dt>
-          <dd className="text-[#654846]">{product.howTo}</dd>
+          <dt className="font-bold text-[#426047]">Como usar</dt>
+          <dd className="text-[#3d5542]">{product.howTo}</dd>
         </div>
         <div className="grid grid-cols-2 gap-3">
           <div className="rounded-lg bg-white/58 p-3">
-            <dt className="text-xs font-bold uppercase tracking-[0.14em] text-[#aa6770]">
+            <dt className="text-xs font-bold uppercase tracking-[0.14em] text-[#62815f]">
               Quantidade
             </dt>
-            <dd className="mt-1 text-[#654846]">{product.amount}</dd>
+            <dd className="mt-1 text-[#3d5542]">{product.amount}</dd>
           </div>
           <div className="rounded-lg bg-white/58 p-3">
-            <dt className="text-xs font-bold uppercase tracking-[0.14em] text-[#aa6770]">
+            <dt className="text-xs font-bold uppercase tracking-[0.14em] text-[#62815f]">
               Resultado
             </dt>
-            <dd className="mt-1 text-[#654846]">{product.result}</dd>
+            <dd className="mt-1 text-[#3d5542]">{product.result}</dd>
           </div>
         </div>
         <div>
-          <dt className="font-bold text-[#80504f]">Observação</dt>
-          <dd className="text-[#654846]">{product.observation}</dd>
+          <dt className="font-bold text-[#426047]">Observação</dt>
+          <dd className="text-[#3d5542]">{product.observation}</dd>
         </div>
       </dl>
     </article>

@@ -12,16 +12,16 @@ export default function RoutinePage({ routine, weekly }) {
 
   return (
     <div className="space-y-4">
-      <section className="overflow-hidden rounded-[1.6rem] bg-gradient-to-br from-[#f0f6da] via-[#fffaf2] to-[#f9e8e7] p-4 shadow-soft ring-1 ring-white/80">
+      <section className="overflow-hidden rounded-[1.6rem] bg-gradient-to-br from-[#dcefc7] via-[#f7faef] to-[#e4f3e6] p-4 shadow-soft ring-1 ring-white/80">
         <div className="flex items-center justify-between gap-4">
           <div>
-            <p className="font-serif text-xl font-bold text-[#3e2924]">Sua semana, do seu jeito</p>
-            <p className="mt-1 max-w-[15rem] text-xs leading-5 text-[#755b54]">
+            <p className="font-serif text-xl font-bold text-[#183525]">Sua semana, do seu jeito</p>
+            <p className="mt-1 max-w-[15rem] text-xs leading-5 text-[#526b55]">
               Troque o tipo de cuidado de qualquer dia quando sua rotina mudar.
             </p>
           </div>
           <button
-            className="touch-target inline-flex shrink-0 items-center gap-2 rounded-full bg-[#a71948] px-4 py-3 text-xs font-black text-white shadow-lg shadow-[#a71948]/15"
+            className="touch-target inline-flex shrink-0 items-center gap-2 rounded-full bg-[#3f7d45] px-4 py-3 text-xs font-black text-white shadow-lg shadow-[#3f7d45]/15"
             onClick={openEditor}
             type="button"
           >
@@ -32,14 +32,14 @@ export default function RoutinePage({ routine, weekly }) {
       </section>
 
       {allDone ? (
-        <section className="rounded-lg bg-gradient-to-br from-[#fff0bf] to-[#e7f6fb] p-4 shadow-soft">
+        <section className="rounded-lg bg-gradient-to-br from-[#e9efc8] to-[#dcebdc] p-4 shadow-soft">
           <div className="flex items-center gap-3">
             <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-white/70 text-[#8b650b]">
               <Icon className="h-6 w-6" name="sparkles" />
             </div>
             <div>
-              <h2 className="text-base font-bold text-[#4a2e2d]">Semana concluída</h2>
-              <p className="mt-1 text-sm leading-5 text-[#6f514e]">
+              <h2 className="text-base font-bold text-[#183525]">Semana concluída</h2>
+              <p className="mt-1 text-sm leading-5 text-[#425b48]">
                 Princesa, a constância da semana está impecável.
               </p>
             </div>
@@ -59,7 +59,7 @@ export default function RoutinePage({ routine, weekly }) {
 
       {weekly.completedCount > 0 ? (
         <button
-          className="touch-target w-full rounded-lg border border-[#d9aa54]/45 bg-white/58 px-4 py-3 text-sm font-bold text-[#76540f]"
+          className="touch-target w-full rounded-lg border border-[#6f9d4f]/45 bg-white/58 px-4 py-3 text-sm font-bold text-[#3f682d]"
           onClick={weekly.resetWeek}
           type="button"
         >

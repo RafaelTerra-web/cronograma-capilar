@@ -30,7 +30,7 @@ export default function TutorialPage({ weekly }) {
           className="h-44 w-full object-cover"
           src="/assets/widi-routine-tools.png"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#3c2522]/58 via-[#3c2522]/8 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#153b25]/58 via-[#153b25]/8 to-transparent" />
         <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
           <p className="text-sm font-bold drop-shadow">Finalização com carinho</p>
           <p className="mt-1 max-w-[17rem] text-xs font-semibold leading-5 text-white/86">
@@ -42,7 +42,7 @@ export default function TutorialPage({ weekly }) {
       <DailyGuideCard
         action={
           <button
-            className="touch-target rounded-lg bg-[#4a2e2d] px-4 py-3 text-xs font-black text-white transition active:scale-[0.98]"
+            className="touch-target rounded-lg bg-[#285b35] px-4 py-3 text-xs font-black text-white transition active:scale-[0.98]"
             onClick={() => setShowOtherDays((value) => !value)}
             type="button"
           >
@@ -57,8 +57,8 @@ export default function TutorialPage({ weekly }) {
       {showOtherDays ? (
         <section className="glass-panel rounded-lg p-4">
           <div>
-            <p className="text-sm font-bold text-[#8d3843]">Outros passo a passo</p>
-            <p className="mt-1 text-xs leading-5 text-[#805b58]">
+            <p className="text-sm font-bold text-[#356b3d]">Outros passo a passo</p>
+            <p className="mt-1 text-xs leading-5 text-[#526b55]">
               Escolha outro dia se quiser se preparar antes.
             </p>
           </div>
@@ -70,8 +70,8 @@ export default function TutorialPage({ weekly }) {
                 <button
                   className={`touch-target rounded-lg px-2 py-3 text-center text-xs font-black transition ${
                     isSelected
-                      ? "bg-[#f8d8dc] text-[#8d3843] shadow-sm"
-                      : "bg-white/64 text-[#6f514e]"
+                      ? "bg-[#dcefc7] text-[#356b3d] shadow-sm"
+                      : "bg-white/64 text-[#425b48]"
                   }`}
                   key={day.id}
                   onClick={() => setSelectedDayId(day.id)}
@@ -84,7 +84,7 @@ export default function TutorialPage({ weekly }) {
             })}
             {!isTodaySelected ? (
               <button
-                className="touch-target col-span-4 rounded-lg border border-[#ce5c66]/30 bg-white/70 px-4 py-3 text-xs font-black text-[#8d3843]"
+                className="touch-target col-span-4 rounded-lg border border-[#4f8a52]/30 bg-white/70 px-4 py-3 text-xs font-black text-[#356b3d]"
                 onClick={showToday}
                 type="button"
               >
@@ -97,8 +97,8 @@ export default function TutorialPage({ weekly }) {
 
       <section>
         <div className="mb-3 px-1">
-          <p className="text-sm font-black text-[#8d3843]">Guia completo de finalização</p>
-          <p className="mt-1 text-xs leading-5 text-[#805b58]">
+          <p className="text-sm font-black text-[#356b3d]">Guia completo de finalização</p>
+          <p className="mt-1 text-xs leading-5 text-[#526b55]">
             Use quando for lavar e finalizar com creme.
           </p>
         </div>
@@ -108,7 +108,7 @@ export default function TutorialPage({ weekly }) {
         <TutorialStep key={step.id} step={step} />
       ))}
 
-      <section className="rounded-lg bg-[#4a2e2d] p-4 text-white shadow-soft">
+      <section className="rounded-lg bg-[#285b35] p-4 text-white shadow-soft">
         <div className="flex items-center gap-3">
           <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-white/14">
             <Icon className="h-5 w-5" name="sparkles" />

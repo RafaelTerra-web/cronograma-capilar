@@ -16,8 +16,8 @@ export default function HomePage({ navigate, weekly }) {
           className="h-48 w-full object-cover"
           src="/assets/widi-routine-tools.png"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#3c2522]/68 via-[#3c2522]/26 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#3c2522]/70 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#153b25]/68 via-[#153b25]/26 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#153b25]/70 via-transparent to-transparent" />
         <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
           <p className="text-sm font-semibold drop-shadow">Olá, Princesa</p>
           <h2 className="mt-1 max-w-[17rem] text-2xl font-black leading-8 text-balance drop-shadow-[0_2px_10px_rgba(36,18,18,0.42)]">
@@ -41,7 +41,7 @@ export default function HomePage({ navigate, weekly }) {
       />
 
       <button
-        className="touch-target flex w-full items-center justify-between rounded-lg bg-[#4a2e2d] px-5 py-4 text-left text-white shadow-soft transition active:scale-[0.99]"
+        className="touch-target flex w-full items-center justify-between rounded-lg bg-[#285b35] px-5 py-4 text-left text-white shadow-soft transition active:scale-[0.99]"
         onClick={() => navigate("tutorial")}
         type="button"
       >
@@ -55,12 +55,12 @@ export default function HomePage({ navigate, weekly }) {
       <section className="glass-panel rounded-lg p-4">
         <div className="flex items-center justify-between gap-3">
           <div>
-            <p className="text-sm font-bold text-[#8d3843]">Resumo da semana</p>
-            <p className="mt-1 text-xs leading-5 text-[#805b58]">
+            <p className="text-sm font-bold text-[#356b3d]">Resumo da semana</p>
+            <p className="mt-1 text-xs leading-5 text-[#526b55]">
               Máscara em {maskDay.dayName.toLowerCase()} · {maskDay.time}
             </p>
           </div>
-          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#fff0bf] text-[#76540f]">
+          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#e3efc8] text-[#54722e]">
             <Icon className="h-5 w-5" name="calendar" />
           </div>
         </div>
@@ -75,10 +75,10 @@ export default function HomePage({ navigate, weekly }) {
                 aria-label={`${day.dayName}, ${day.dateLabel}`}
                 className={`rounded-lg px-1 py-2 text-center text-[11px] font-bold transition ${
                   done
-                    ? "bg-[#d9aa54] text-white"
+                    ? "bg-[#6f9d4f] text-white"
                     : isToday
-                      ? "bg-[#f8d8dc] text-[#8d3843]"
-                      : "bg-white/64 text-[#7a5a58]"
+                      ? "bg-[#dcefc7] text-[#356b3d]"
+                      : "bg-white/64 text-[#58705b]"
                 }`}
                 key={day.id}
                 onClick={() => weekly.toggleDay(day.id)}
@@ -99,7 +99,7 @@ export default function HomePage({ navigate, weekly }) {
       <section className="grid grid-cols-2 gap-3">
         {routineHighlights.map((highlight) => (
           <div className="rounded-lg bg-white/62 p-3 shadow-sm" key={highlight}>
-            <p className="text-xs font-bold leading-5 text-[#6b4b49]">{highlight}</p>
+            <p className="text-xs font-bold leading-5 text-[#425b48]">{highlight}</p>
           </div>
         ))}
       </section>

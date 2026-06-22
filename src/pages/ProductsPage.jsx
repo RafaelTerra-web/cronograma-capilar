@@ -10,7 +10,7 @@ export default function ProductsPage() {
           className="h-44 w-full object-cover"
           src="/assets/widi-kit-products.png"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#3c2522]/55 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#153b25]/55 via-transparent to-transparent" />
         <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
           <p className="text-sm font-bold drop-shadow">Kit Widi Care</p>
           <p className="mt-1 max-w-[18rem] text-xs font-semibold leading-5 text-white/86">

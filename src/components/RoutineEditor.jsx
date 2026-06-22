@@ -57,24 +57,24 @@ export default function RoutineEditor({ days, initialDayId, onClose, onSave, ope
           animate={{ opacity: 1 }}
           aria-label="Editar rotina"
           aria-modal="true"
-          className="fixed inset-0 z-[70] mx-auto flex w-full max-w-[430px] flex-col overflow-hidden bg-[#fffaf4] shadow-2xl"
+          className="fixed inset-0 z-[70] mx-auto flex w-full max-w-[430px] flex-col overflow-hidden bg-[#f8fbed] shadow-2xl"
           exit={{ opacity: 0 }}
           initial={{ opacity: 0 }}
           role="dialog"
         >
-          <header className="safe-top flex items-center justify-between border-b border-[#eadbd1] bg-white/80 px-4 pb-3 backdrop-blur-xl">
+          <header className="safe-top flex items-center justify-between border-b border-[#d8e4d2] bg-white/80 px-4 pb-3 backdrop-blur-xl">
             <button
               aria-label="Voltar"
-              className="touch-target flex items-center justify-center rounded-full bg-[#f8efe8] text-[#704b45]"
+              className="touch-target flex items-center justify-center rounded-full bg-[#edf4e5] text-[#426047]"
               onClick={onClose}
               type="button"
             >
               <Icon name="arrowLeft" />
             </button>
-            <h2 className="font-serif text-2xl font-bold text-[#36231f]">Editar rotina</h2>
+            <h2 className="font-serif text-2xl font-bold text-[#183525]">Editar rotina</h2>
             <button
               aria-label="Fechar editor"
-              className="touch-target flex items-center justify-center rounded-full bg-[#f8efe8] text-[#704b45]"
+              className="touch-target flex items-center justify-center rounded-full bg-[#edf4e5] text-[#426047]"
               onClick={onClose}
               type="button"
             >
@@ -83,7 +83,7 @@ export default function RoutineEditor({ days, initialDayId, onClose, onSave, ope
           </header>
 
           <div className="no-scrollbar min-h-0 flex-1 overflow-y-auto px-4 pb-6 pt-4">
-            <div className="grid grid-cols-7 gap-1 rounded-[1.4rem] bg-white p-2 shadow-sm ring-1 ring-[#eadbd1]">
+            <div className="grid grid-cols-7 gap-1 rounded-[1.4rem] bg-white p-2 shadow-sm ring-1 ring-[#d8e4d2]">
               {days.map((day) => {
                 const selected = day.id === selectedDay.id;
                 return (
@@ -92,7 +92,7 @@ export default function RoutineEditor({ days, initialDayId, onClose, onSave, ope
                     className={`touch-target rounded-2xl px-1 py-2 text-center transition ${
                       selected
                         ? "bg-[#e9f4c9] text-[#405b18] ring-1 ring-[#83a93b]"
-                        : "text-[#755d55]"
+                        : "text-[#58705b]"
                     }`}
                     key={day.id}
                     onClick={() => setSelectedDayId(day.id)}
@@ -105,18 +105,18 @@ export default function RoutineEditor({ days, initialDayId, onClose, onSave, ope
               })}
             </div>
 
-            <section className="mt-4 flex items-center gap-3 rounded-[1.5rem] bg-gradient-to-r from-[#eaf5ca] to-[#f6f5da] p-4 shadow-sm">
+            <section className="mt-4 flex items-center gap-3 rounded-[1.5rem] bg-gradient-to-r from-[#dcefc7] to-[#eef5d8] p-4 shadow-sm">
               <span className="flex h-12 w-12 items-center justify-center rounded-full bg-white/70 text-[#638d25]">
                 <Icon className="h-6 w-6" name={preview.icon} />
               </span>
               <div>
-                <p className="font-serif text-xl font-bold text-[#39251f]">{selectedDay.dayName}</p>
+                <p className="font-serif text-xl font-bold text-[#183525]">{selectedDay.dayName}</p>
                 <p className="mt-0.5 text-xs font-semibold text-[#71813f]">Escolha o cuidado deste dia</p>
               </div>
             </section>
 
             <fieldset className="mt-5 space-y-3">
-              <legend className="mb-3 text-sm font-black text-[#513631]">Tipo de cuidado</legend>
+              <legend className="mb-3 text-sm font-black text-[#25472f]">Tipo de cuidado</legend>
               {careTypeOptions.map((careType) => {
                 const checked = selectedCareType === careType.id;
                 return (
@@ -124,7 +124,7 @@ export default function RoutineEditor({ days, initialDayId, onClose, onSave, ope
                     className={`flex cursor-pointer items-start gap-3 rounded-[1.35rem] border p-4 transition ${
                       checked
                         ? "border-[#9aaf4f] bg-[#f4f8e6] shadow-sm"
-                        : "border-[#eadbd1] bg-white"
+                        : "border-[#d8e4d2] bg-white"
                     }`}
                     key={careType.id}
                   >
@@ -141,8 +141,8 @@ export default function RoutineEditor({ days, initialDayId, onClose, onSave, ope
                         <Icon className="h-5 w-5" name={careType.icon} />
                       </span>
                       <span>
-                        <span className="block text-sm font-black text-[#4b312c]">{careType.label}</span>
-                        <span className="mt-1 block text-xs leading-5 text-[#7c625a]">{careType.howTo}</span>
+                        <span className="block text-sm font-black text-[#25472f]">{careType.label}</span>
+                        <span className="mt-1 block text-xs leading-5 text-[#526b55]">{careType.howTo}</span>
                       </span>
                     </span>
                   </label>
@@ -150,35 +150,35 @@ export default function RoutineEditor({ days, initialDayId, onClose, onSave, ope
               })}
             </fieldset>
 
-            <section className="mt-5 rounded-[1.5rem] border border-[#eadbd1] bg-white p-4">
-              <p className="text-xs font-black uppercase tracking-[0.14em] text-[#a13552]">Prévia do cuidado</p>
+            <section className="mt-5 rounded-[1.5rem] border border-[#d8e4d2] bg-white p-4">
+              <p className="text-xs font-black uppercase tracking-[0.14em] text-[#4f7d46]">Prévia do cuidado</p>
               <div className="mt-3 grid grid-cols-2 gap-3 text-xs">
-                <div className="rounded-2xl bg-[#fbf3ed] p-3">
-                  <p className="font-bold text-[#8d3843]">Produtos</p>
-                  <p className="mt-1 leading-5 text-[#6f514e]">{preview.products.join(", ")}</p>
+                <div className="rounded-2xl bg-[#eef5e7] p-3">
+                  <p className="font-bold text-[#356b3d]">Produtos</p>
+                  <p className="mt-1 leading-5 text-[#425b48]">{preview.products.join(", ")}</p>
                 </div>
                 <div className="rounded-2xl bg-[#f1f7df] p-3">
                   <p className="font-bold text-[#587622]">Tempo</p>
                   <p className="mt-1 leading-5 text-[#657248]">{preview.time}</p>
                 </div>
               </div>
-              <p className="mt-3 rounded-2xl bg-[#f2f7fb] p-3 text-xs leading-5 text-[#536b76]">
+              <p className="mt-3 rounded-2xl bg-[#e8f2e5] p-3 text-xs leading-5 text-[#426047]">
                 {preview.observation}
               </p>
             </section>
           </div>
 
-          <footer className="safe-bottom shrink-0 border-t border-[#eadbd1] bg-white/92 px-4 pt-3 backdrop-blur-xl">
+          <footer className="safe-bottom shrink-0 border-t border-[#d8e4d2] bg-white/92 px-4 pt-3 backdrop-blur-xl">
             <div className="grid grid-cols-[0.8fr_1.2fr] gap-3">
               <button
-                className="touch-target rounded-full border border-[#a5234b] bg-white px-4 py-3 text-sm font-black text-[#8d2345]"
+                className="touch-target rounded-full border border-[#4f8a52] bg-white px-4 py-3 text-sm font-black text-[#356b3d]"
                 onClick={onClose}
                 type="button"
               >
                 Cancelar
               </button>
               <button
-                className="touch-target rounded-full bg-[#a71948] px-4 py-3 text-sm font-black text-white shadow-lg shadow-[#a71948]/20"
+                className="touch-target rounded-full bg-[#3f7d45] px-4 py-3 text-sm font-black text-white shadow-lg shadow-[#3f7d45]/20"
                 onClick={save}
                 type="button"
               >

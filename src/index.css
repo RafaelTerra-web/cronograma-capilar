@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 :root {
-  color: #4a2e2d;
-  background: #fff7ef;
+  color: #183525;
+  background: #f4f9ec;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -17,7 +17,7 @@
 
 html {
   min-height: 100%;
-  background: linear-gradient(135deg, #fff7ef 0%, #fff1f4 48%, #f1fbff 100%);
+  background: linear-gradient(135deg, #f7faef 0%, #edf6df 48%, #e4f3e6 100%);
 }
 
 body {
@@ -43,13 +43,13 @@ button {
 .app-frame {
   min-height: 100dvh;
   background:
-    linear-gradient(180deg, rgba(255, 250, 246, 0.97) 0%, rgba(255, 245, 248, 0.95) 48%, rgba(239, 250, 255, 0.96) 100%);
+    linear-gradient(180deg, rgba(249, 252, 243, 0.98) 0%, rgba(241, 248, 230, 0.96) 48%, rgba(231, 244, 232, 0.97) 100%);
 }
 
 .glass-panel {
   border: 1px solid rgba(255, 255, 255, 0.78);
   background: rgba(255, 255, 255, 0.76);
-  box-shadow: 0 16px 42px rgba(109, 59, 55, 0.11);
+  box-shadow: 0 16px 42px rgba(42, 84, 50, 0.11);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
 }

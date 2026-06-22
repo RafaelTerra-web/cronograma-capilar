@@ -27,17 +27,17 @@ export default function TipsPage() {
 
       <section className="glass-panel rounded-lg p-4">
         <div className="flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#fff0bf] text-[#806118]">
+          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#e9efc8] text-[#66762c]">
             <Icon className="h-5 w-5" name="lightbulb" />
           </div>
-          <h2 className="text-base font-bold text-[#4a2e2d]">Ajustes rápidos</h2>
+          <h2 className="text-base font-bold text-[#183525]">Ajustes rápidos</h2>
         </div>
         <div className="mt-4 space-y-3">
           {adjustmentNotes.map((item) => (
             <article className="rounded-lg bg-white/60 p-3" key={item.issue}>
-              <h3 className="text-sm font-bold text-[#8d3843]">{item.issue}</h3>
-              <p className="mt-1 text-xs leading-5 text-[#805b58]">{item.cause}</p>
-              <p className="mt-2 text-sm font-semibold leading-5 text-[#4a2e2d]">{item.fix}</p>
+              <h3 className="text-sm font-bold text-[#356b3d]">{item.issue}</h3>
+              <p className="mt-1 text-xs leading-5 text-[#526b55]">{item.cause}</p>
+              <p className="mt-2 text-sm font-semibold leading-5 text-[#183525]">{item.fix}</p>
             </article>
           ))}
         </div>
