@@ -1,9 +1,10 @@
-import { motion } from "framer-motion";
+import { MotionConfig, motion } from "framer-motion";
 import { useEffect, useMemo, useState } from "react";
 import AppShell from "./components/AppShell.jsx";
+import WhatsNewOnboarding from "./components/WhatsNewOnboarding.jsx";
 import { navItems } from "./data/navigation.js";
-import { routineDays } from "./data/routine.js";
 import useMonthlyChecklist from "./hooks/useMonthlyChecklist.js";
+import useRoutineConfig from "./hooks/useRoutineConfig.js";
 import useWeeklyRoutine from "./hooks/useWeeklyRoutine.js";
 import ChecklistPage from "./pages/ChecklistPage.jsx";
 import HomePage from "./pages/HomePage.jsx";
@@ -34,7 +35,8 @@ function getInitialTab() {
 
 export default function App() {
   const [activeTab, setActiveTab] = useState(getInitialTab);
-  const weekly = useWeeklyRoutine(routineDays);
+  const routine = useRoutineConfig();
+  const weekly = useWeeklyRoutine(routine.days);
   const monthly = useMonthlyChecklist();
 
   useEffect(() => {
@@ -69,22 +71,25 @@ export default function App() {
   const Page = pageMap[activeTab] ?? HomePage;
 
   return (
-    <AppShell
-      activeTab={activeTab}
-      navItems={navItems}
-      onNavigate={navigate}
-      subtitle={activeMeta.subtitle}
-      title={activeMeta.title}
-      weeklyProgress={weekly.percent}
-    >
-      <motion.div
-        key={activeTab}
-        animate={{ opacity: 1, y: 0 }}
-        initial={{ opacity: 0, y: 14 }}
-        transition={{ duration: 0.22, ease: "easeOut" }}
+    <MotionConfig reducedMotion="user">
+      <WhatsNewOnboarding />
+      <AppShell
+        activeTab={activeTab}
+        navItems={navItems}
+        onNavigate={navigate}
+        subtitle={activeMeta.subtitle}
+        title={activeMeta.title}
+        weeklyProgress={weekly.percent}
       >
-        <Page monthly={monthly} navigate={navigate} weekly={weekly} />
-      </motion.div>
-    </AppShell>
+        <motion.div
+          key={activeTab}
+          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 14 }}
+          transition={{ duration: 0.22, ease: "easeOut" }}
+        >
+          <Page monthly={monthly} navigate={navigate} routine={routine} weekly={weekly} />
+        </motion.div>
+      </AppShell>
+    </MotionConfig>
   );
 }

@@ -74,6 +74,8 @@ src/
 ## Funcionalidades
 
 - Tela Hoje com rotina do dia, imagem visual e progresso semanal.
+- Rotina semanal editável por tipo de cuidado, com persistência no navegador.
+- Introdução visual das novidades exibida uma vez por versão.
 - Rotina semanal com status pendente/feito e marcação por data real.
 - Calendário mensal visual mostrando os dias da rotina já marcados.
 - Produtos do kit com frequência, quantidade, resultado e observações.
@@ -81,6 +83,7 @@ src/
 - Checklist mensal salvo por mês no `localStorage`.
 - Dicas rápidas e observações carinhosas chamando ela de princesa.
 - Layout centralizado no desktop e otimizado para iOS com safe areas.
+- Ícones PWA e Apple Touch Icon derivados da nova identidade visual.
 
 ## Próximos passos possíveis
 

@@ -1,5 +1,3 @@
-import { Icon } from "../utils/iconMap.jsx";
-
 export default function Header({ subtitle, title, weeklyProgress }) {
   return (
     <header className="safe-top relative z-20 px-4 pb-2">
@@ -14,8 +12,12 @@ export default function Header({ subtitle, title, weeklyProgress }) {
           <p className="mt-1 max-w-[19rem] text-sm leading-5 text-[#815b59]">{subtitle}</p>
         </div>
         <div className="glass-panel mr-1 flex h-12 w-12 shrink-0 items-center justify-center rounded-lg">
-          <div className="relative flex h-9 w-9 items-center justify-center rounded-full bg-[#fff7ef]">
-            <Icon className="h-5 w-5 text-[#cf5b68]" name="sparkles" />
+          <div className="relative flex h-10 w-10 items-center justify-center">
+            <img
+              alt=""
+              className="h-10 w-10 rounded-xl object-cover ring-2 ring-white"
+              src="/icons/icon-192.png"
+            />
             <span className="absolute bottom-0 right-0 rounded-full bg-[#b8dceb] px-1.5 py-0.5 text-[10px] font-bold text-[#314d59]">
               {weeklyProgress}%
             </span>

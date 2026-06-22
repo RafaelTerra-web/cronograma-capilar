@@ -1,4 +1,5 @@
 import {
+  ArrowLeft,
   Bath,
   CalendarDays,
   Check,
@@ -7,6 +8,7 @@ import {
   Circle,
   CloudSun,
   Droplets,
+  Edit3,
   Flower2,
   Heart,
   Home,
@@ -15,13 +17,16 @@ import {
   Moon,
   Package,
   RefreshCw,
+  RotateCcw,
   Sparkles,
   SprayCan,
   Waves,
-  Wind
+  Wind,
+  X
 } from "lucide-react";
 
 const icons = {
+  arrowLeft: ArrowLeft,
   bath: Bath,
   bottle: Package,
   calendar: CalendarDays,
@@ -31,6 +36,7 @@ const icons = {
   circle: Circle,
   cloud: CloudSun,
   droplets: Droplets,
+  edit: Edit3,
   flower: Flower2,
   heart: Heart,
   home: Home,
@@ -38,10 +44,12 @@ const icons = {
   lightbulb: Lightbulb,
   moon: Moon,
   refresh: RefreshCw,
+  reset: RotateCcw,
   sparkles: Sparkles,
   spray: SprayCan,
   waves: Waves,
-  wind: Wind
+  wind: Wind,
+  x: X
 };
 
 export function Icon({ name, className = "h-5 w-5", strokeWidth = 2 }) {

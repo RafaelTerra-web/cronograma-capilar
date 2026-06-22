@@ -1,9 +1,12 @@
-const CACHE_NAME = "cronograma-capilar-v1";
+const CACHE_NAME = "cronograma-capilar-v2";
 const APP_ASSETS = [
   "/",
   "/index.html",
   "/manifest.webmanifest",
-  "/favicon.svg",
+  "/icons/favicon-64.png",
+  "/icons/apple-touch-icon.png",
+  "/icons/icon-192.png",
+  "/icons/icon-512.png",
   "/assets/widi-inspired-hero.png",
   "/assets/widi-routine-tools.png",
   "/assets/widi-kit-products.png",

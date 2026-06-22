@@ -1,7 +1,8 @@
 import { useMemo, useState } from "react";
 import DailyGuideCard from "../components/DailyGuideCard.jsx";
 import TutorialStep from "../components/TutorialStep.jsx";
-import { dailyGuides, goldenRules, tutorialSteps } from "../data/tutorial.js";
+import { careGuides } from "../data/routine.js";
+import { goldenRules, tutorialSteps } from "../data/tutorial.js";
 import { Icon } from "../utils/iconMap.jsx";
 
 export default function TutorialPage({ weekly }) {
@@ -13,7 +14,7 @@ export default function TutorialPage({ weekly }) {
     () => weekly.weekEntries.find((day) => day.id === selectedDayId) ?? weekly.todayEntry,
     [selectedDayId, weekly.todayEntry, weekly.weekEntries]
   );
-  const selectedGuide = dailyGuides[selectedDay.id] ?? dailyGuides[todayId];
+  const selectedGuide = careGuides[selectedDay.careType] ?? careGuides.dayAfter;
   const isTodaySelected = selectedDay.id === todayId;
 
   const showToday = () => {
